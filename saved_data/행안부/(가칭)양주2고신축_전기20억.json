@@ -1,0 +1,1691 @@
+{
+    "saved_name": "(가칭)양주2고신축_전기20억",
+    "saved_date": "2025-08-12 17:51:42",
+    "region_limit": "경기",
+    "project_type": "전기",
+    "consortiums": [
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "지음이엔아이㈜",
+                    "data": {
+                        "3년 실적": 39406075000,
+                        "5년 실적": 59183685000,
+                        "검색된 회사": "지음이엔아이㈜",
+                        "고용자수": "",
+                        "대표자": "유형민",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 31.6,
+                        "비고": "특6,고8, 중4, 초1 (23.08.01)",
+                        "사업자번호": "132-81-79967",
+                        "시평": 40727433000,
+                        "신용평가": "BBB0\n(25.06.13~26.06.12)",
+                        "여성기업": "",
+                        "영업기간": "1995.06.29",
+                        "유동비율": 218.75,
+                        "일자리창출": "O",
+                        "지역": "경기도 남양주시",
+                        "품질평가": "93.38 (25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 59183685000.0,
+                    "share": 1.0
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 59183685000.0,
+            "performance_ratio": 2111.8359803797107,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "지음이엔아이㈜",
+                    "role": "대표사",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "에코엠이엔씨㈜",
+                    "data": {
+                        "3년 실적": 2790238000,
+                        "5년 실적": 14977246000,
+                        "검색된 회사": "에코엠이엔씨㈜",
+                        "고용자수": "",
+                        "대표자": "이민아",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 14.23,
+                        "비고": "특1, 중1, 초4 (23.08.01)",
+                        "사업자번호": "107-87-75007",
+                        "시평": 8419733000,
+                        "신용평가": "BB+\n(25.04.08~26.04.07)",
+                        "여성기업": "",
+                        "영업기간": "1997.01.28",
+                        "유동비율": 618.4600000000002,
+                        "일자리창출": "",
+                        "지역": "경기도 화성시",
+                        "품질평가": "없음(25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 14977246000.0,
+                    "share": 1.0
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 14977246000.0,
+            "performance_ratio": 534.4291588095283,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "에코엠이엔씨㈜",
+                    "role": "대표사",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "아람이엔테크㈜",
+                    "data": {
+                        "3년 실적": 29550673000,
+                        "5년 실적": 39361754000,
+                        "검색된 회사": "아람이엔테크㈜",
+                        "고용자수": "",
+                        "대표자": "정충선",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 112.99,
+                        "비고": "특1, 고1, 중1, 초2 (23.08.01)",
+                        "사업자번호": "119-86-35582",
+                        "시평": 36831954000,
+                        "신용평가": "BB+\n(25.06.02~26.06.01)",
+                        "여성기업": "",
+                        "영업기간": "2010.06.24",
+                        "유동비율": 31.630000000000003,
+                        "일자리창출": "O",
+                        "지역": "경기도 양평군",
+                        "품질평가": "90.73(25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 6.4,
+                        "current_score": 4.2,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "신용평가"
+                    },
+                    "performance_5y": 39361754000.0,
+                    "share": 1.0
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 39361754000.0,
+            "performance_ratio": 1404.5351915490728,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "아람이엔테크㈜",
+                    "role": "대표사",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜대흥디씨티",
+                    "data": {
+                        "3년 실적": 31192643000,
+                        "5년 실적": 34748832000,
+                        "검색된 회사": "㈜대흥디씨티",
+                        "고용자수": "",
+                        "대표자": "박준석",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 15.010000000000002,
+                        "비고": "특2, 고5, 초3 (23.08.01)",
+                        "사업자번호": "127-81-95155",
+                        "시평": 24147234000,
+                        "신용평가": "BBB-\n(25.05.09~26.05.08)",
+                        "여성기업": "",
+                        "영업기간": "2005.12.07",
+                        "유동비율": 450.34999999999997,
+                        "일자리창출": "O",
+                        "지역": "경기도 양평군",
+                        "품질평가": "없음(25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 34748832000.0,
+                    "share": 1.0
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 34748832000.0,
+            "performance_ratio": 1239.9335001490674,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜대흥디씨티",
+                    "role": "대표사",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜우진일렉트",
+                    "data": {
+                        "3년 실적": 28823589000,
+                        "5년 실적": 57539030000,
+                        "검색된 회사": "㈜우진일렉트",
+                        "고용자수": "",
+                        "대표자": "박현식",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 16.8,
+                        "비고": "특6, 고4, 중1, 초3 (23.08.01)",
+                        "사업자번호": "135-81-40632",
+                        "시평": 21707328000,
+                        "신용평가": "BBB-\n(25.06.27~26.06.26)",
+                        "여성기업": "",
+                        "영업기간": "2005.05.19",
+                        "유동비율": 495.04,
+                        "일자리창출": "",
+                        "지역": "경기도 성남시",
+                        "품질평가": "없음 (25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 57539030000.0,
+                    "share": 1.0
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 57539030000.0,
+            "performance_ratio": 2053.150185395647,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜우진일렉트",
+                    "role": "대표사",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜대한종합산전",
+                    "data": {
+                        "3년 실적": 15077612000,
+                        "5년 실적": 32826052000,
+                        "검색된 회사": "㈜대한종합산전",
+                        "고용자수": "",
+                        "대표자": "이섭 외 1인",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 133.28,
+                        "비고": "",
+                        "사업자번호": "105-81-62163",
+                        "시평": 10679022000,
+                        "신용평가": "BB0\n(25.04.16~26.04.15)",
+                        "여성기업": "",
+                        "영업기간": "1995.05.17",
+                        "유동비율": 614.82,
+                        "일자리창출": "",
+                        "지역": "서울시 강남구",
+                        "품질평가": "없음(24.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 5.6,
+                        "current_score": 7.0,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "신용평가"
+                    },
+                    "performance_5y": 32826052000.0,
+                    "share": 0.51
+                },
+                {
+                    "role": "구성사 1",
+                    "name": "동해전기공사",
+                    "data": {
+                        "3년 실적": 218430000,
+                        "5년 실적": 708518000,
+                        "검색된 회사": "동해전기공사",
+                        "고용자수": "",
+                        "대표자": "조돈예",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "1년 이상 경과",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 0.51,
+                        "비고": "박재웅 특1,중1.초1(22.10.20)",
+                        "사업자번호": "132-01-94739",
+                        "시평": 1414707000,
+                        "신용평가": "",
+                        "여성기업": "",
+                        "영업기간": "1997.05.26",
+                        "유동비율": 11478.060000000001,
+                        "일자리창출": "",
+                        "지역": "경기도 양평군",
+                        "품질평가": ""
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 0.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "자료없음",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 708518000.0,
+                    "share": 0.49
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 17088460340.0,
+            "performance_ratio": 609.7630689150852,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜대한종합산전",
+                    "role": "대표사",
+                    "possible": false,
+                    "reason": "지역 불일치 (필요: 경기)"
+                },
+                {
+                    "name": "동해전기공사",
+                    "role": "구성사 1",
+                    "possible": false,
+                    "reason": "실적 부족 (필요: 2,241,980,364원)"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜지음쏠라테크",
+                    "data": {
+                        "3년 실적": 1305775000,
+                        "5년 실적": 8216820000,
+                        "검색된 회사": "㈜지음쏠라테크",
+                        "고용자수": "",
+                        "대표자": "조경용",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 17.43,
+                        "비고": "고2, 중1, 초1 (23.08.01)",
+                        "사업자번호": "407-87-00819",
+                        "시평": 2498290000,
+                        "신용평가": "BB+\n(25.05.09~26.05.08)",
+                        "여성기업": "",
+                        "영업기간": "2018.03.09",
+                        "유동비율": 349.98999999999995,
+                        "일자리창출": "",
+                        "지역": "인천광역시 연수구",
+                        "품질평가": "없음 (25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 8216820000.0,
+                    "share": 0.51
+                },
+                {
+                    "role": "구성사 1",
+                    "name": "은성산업㈜",
+                    "data": {
+                        "3년 실적": 0,
+                        "5년 실적": 0,
+                        "검색된 회사": "은성산업㈜",
+                        "고용자수": "",
+                        "대표자": "이동준",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 492.66000000000014,
+                        "비고": "유형민",
+                        "사업자번호": "133-81-22735",
+                        "시평": 670675000,
+                        "신용평가": "BB+\n(25.06.26~26.06.25)",
+                        "여성기업": "",
+                        "영업기간": "2019.05.14",
+                        "유동비율": 116.84,
+                        "일자리창출": "",
+                        "지역": "경기도 과천시",
+                        "품질평가": ""
+                    },
+                    "business_score_details": {
+                        "debt_score": 4.8,
+                        "current_score": 4.9,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "신용평가"
+                    },
+                    "performance_5y": 0,
+                    "share": 0.49
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 4190578200.0,
+            "performance_ratio": 149.5313078486891,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜지음쏠라테크",
+                    "role": "대표사",
+                    "possible": false,
+                    "reason": "지역 불일치 (필요: 경기)"
+                },
+                {
+                    "name": "은성산업㈜",
+                    "role": "구성사 1",
+                    "possible": false,
+                    "reason": "실적 부족 (필요: 2,241,980,364원)"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜보원엔지니어링",
+                    "data": {
+                        "3년 실적": 5809999000,
+                        "5년 실적": 15345190000,
+                        "검색된 회사": "㈜보원엔지니어링",
+                        "고용자수": "",
+                        "대표자": "신재혁",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 8.1,
+                        "비고": "이재웅",
+                        "사업자번호": "134-81-75195",
+                        "시평": 8883738000,
+                        "신용평가": "BB-\n(25.04.25~26.04.24)",
+                        "여성기업": "",
+                        "영업기간": "2000.11.10",
+                        "유동비율": 1035.68,
+                        "일자리창출": "",
+                        "지역": "충북 음성군",
+                        "품질평가": "없음(25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 14.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 15345190000.0,
+                    "share": 0.51
+                },
+                {
+                    "role": "구성사 1",
+                    "name": "삼영플랜트㈜",
+                    "data": {
+                        "3년 실적": 17523143000,
+                        "5년 실적": 17523143000,
+                        "검색된 회사": "삼영플랜트㈜",
+                        "고용자수": "",
+                        "대표자": "기형호",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 159.89,
+                        "비고": "김동식",
+                        "사업자번호": "123-81-46201",
+                        "시평": 10809983000,
+                        "신용평가": "BB+\n(25.04.17~26.04.16)",
+                        "여성기업": "",
+                        "영업기간": "2022.05.31",
+                        "유동비율": 99.75,
+                        "일자리창출": "",
+                        "지역": "경기도 안성시",
+                        "품질평가": "없음(24.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 4.8,
+                        "current_score": 4.2,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "신용평가"
+                    },
+                    "performance_5y": 17523143000.0,
+                    "share": 0.49
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 16412386970.0,
+            "performance_ratio": 585.6389193603125,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜보원엔지니어링",
+                    "role": "대표사",
+                    "possible": false,
+                    "reason": "지역 불일치 (필요: 경기)"
+                },
+                {
+                    "name": "삼영플랜트㈜",
+                    "role": "구성사 1",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜정준테크",
+                    "data": {
+                        "3년 실적": 3250372000,
+                        "5년 실적": 3664456000,
+                        "검색된 회사": "㈜정준테크",
+                        "고용자수": "",
+                        "대표자": "이동훈",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 49.91,
+                        "비고": "이동훈",
+                        "사업자번호": "185-81-02351",
+                        "시평": 2957695000,
+                        "신용평가": "BBB\n(25.08.06~26.08.05)",
+                        "여성기업": "",
+                        "영업기간": "2021.08.02",
+                        "유동비율": 300.34000000000003,
+                        "일자리창출": "",
+                        "지역": "서울시 금천구",
+                        "품질평가": "없음 (25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 0.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 3664456000.0,
+                    "share": 0.51
+                },
+                {
+                    "role": "구성사 1",
+                    "name": "일광이앤씨㈜",
+                    "data": {
+                        "3년 실적": 7688728000,
+                        "5년 실적": 14643377000,
+                        "검색된 회사": "일광이앤씨㈜",
+                        "고용자수": "",
+                        "대표자": "반극헌",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 101.78,
+                        "비고": "",
+                        "사업자번호": "612-87-00347",
+                        "시평": 3824762000,
+                        "신용평가": "A-\n(25.05.29~26.05.28)",
+                        "여성기업": "",
+                        "영업기간": "1978.11.15",
+                        "유동비율": 82.44,
+                        "일자리창출": "",
+                        "지역": "경기도 성남시",
+                        "품질평가": "91.63 (25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 6.4,
+                        "current_score": 4.2,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "신용평가"
+                    },
+                    "performance_5y": 14643377000.0,
+                    "share": 0.49
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 9044127290.0,
+            "performance_ratio": 322.7192328790619,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜정준테크",
+                    "role": "대표사",
+                    "possible": false,
+                    "reason": "지역 불일치 (필요: 경기)"
+                },
+                {
+                    "name": "일광이앤씨㈜",
+                    "role": "구성사 1",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜도화엔지니어링",
+                    "data": {
+                        "3년 실적": 86368441000,
+                        "5년 실적": 328448752000,
+                        "검색된 회사": "㈜도화엔지니어링",
+                        "고용자수": "",
+                        "대표자": "박승우 외 3인",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 115.60999999999999,
+                        "비고": "고1,중1,초2(23.08.25)",
+                        "사업자번호": "211-81-08009",
+                        "시평": 34446603000,
+                        "신용평가": "AA0\n(25.03.28~26.03.27)",
+                        "여성기업": "",
+                        "영업기간": "2011.02.07",
+                        "유동비율": 95.48,
+                        "일자리창출": "",
+                        "지역": "서울시 강남구",
+                        "품질평가": "93.38 (25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 6.4,
+                        "current_score": 4.2,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "신용평가"
+                    },
+                    "performance_5y": 328448752000.0,
+                    "share": 0.51
+                },
+                {
+                    "role": "구성사 1",
+                    "name": "㈜녹십자이엠",
+                    "data": {
+                        "3년 실적": 3504271000,
+                        "5년 실적": 4319931000,
+                        "검색된 회사": "㈜녹십자이엠",
+                        "고용자수": "",
+                        "대표자": "박충권",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 107.19000000000001,
+                        "비고": "유형민",
+                        "사업자번호": "135-81-44619",
+                        "시평": 2554498000,
+                        "신용평가": "A+\n(25.05.29~26.05.25)",
+                        "여성기업": "",
+                        "영업기간": "2001.05.09",
+                        "유동비율": 138.21,
+                        "일자리창출": "",
+                        "지역": "경기도 성남시",
+                        "품질평가": ""
+                    },
+                    "business_score_details": {
+                        "debt_score": 6.4,
+                        "current_score": 4.9,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "신용평가"
+                    },
+                    "performance_5y": 4319931000.0,
+                    "share": 0.49
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 169625629710.0,
+            "performance_ratio": 6052.707059659154,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜도화엔지니어링",
+                    "role": "대표사",
+                    "possible": false,
+                    "reason": "지역 불일치 (필요: 경기)"
+                },
+                {
+                    "name": "㈜녹십자이엠",
+                    "role": "구성사 1",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "광동전력",
+                    "data": {
+                        "3년 실적": 5052734000,
+                        "5년 실적": 7486618000,
+                        "검색된 회사": "광동전력",
+                        "고용자수": "",
+                        "대표자": "오창진 외 1인",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "1년 이상 경과",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 40.79,
+                        "비고": "조정",
+                        "사업자번호": "616-81-14822",
+                        "시평": 2409872000,
+                        "신용평가": "",
+                        "여성기업": "",
+                        "영업기간": "2016.06.15",
+                        "유동비율": 1233.92,
+                        "일자리창출": "",
+                        "지역": "제주도 서귀포시",
+                        "품질평가": ""
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 0.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "자료없음",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 7486618000.0,
+                    "share": 0.51
+                },
+                {
+                    "role": "구성사 1",
+                    "name": "㈜이엘케이",
+                    "data": {
+                        "3년 실적": 1946642000,
+                        "5년 실적": 1956642000,
+                        "검색된 회사": "㈜이엘케이",
+                        "고용자수": "",
+                        "대표자": "김기욱",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "1년 이상 경과",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 4.75,
+                        "비고": "",
+                        "사업자번호": "128-81-56359",
+                        "시평": 3103105000,
+                        "신용평가": "",
+                        "여성기업": "",
+                        "영업기간": "1991.02.28",
+                        "유동비율": 30138.510000000002,
+                        "일자리창출": "",
+                        "지역": "경기도 고양시",
+                        "품질평가": "없음(24.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 0.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "자료없음",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 1956642000.0,
+                    "share": 0.49
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 4776929760.0,
+            "performance_ratio": 170.45393748149704,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "광동전력",
+                    "role": "대표사",
+                    "possible": false,
+                    "reason": "지역 불일치 (필요: 경기)"
+                },
+                {
+                    "name": "㈜이엘케이",
+                    "role": "구성사 1",
+                    "possible": false,
+                    "reason": "실적 부족 (필요: 2,241,980,364원)"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜남양계전",
+                    "data": {
+                        "3년 실적": 151651391000,
+                        "5년 실적": 229675529000,
+                        "검색된 회사": "㈜남양계전",
+                        "고용자수": "",
+                        "대표자": "민강기",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 18.04,
+                        "비고": "박근환",
+                        "사업자번호": "202-81-36758",
+                        "시평": 143126300000,
+                        "신용평가": "BBB+\n(25.04.09~26.04.08)",
+                        "여성기업": "",
+                        "영업기간": "1983.07.05",
+                        "유동비율": 230.73000000000002,
+                        "일자리창출": "",
+                        "지역": "서울시 서초구",
+                        "품질평가": "없음 (25.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 229675529000.0,
+                    "share": 0.51
+                },
+                {
+                    "role": "구성사 1",
+                    "name": "㈜엠라이테크",
+                    "data": {
+                        "3년 실적": 763405000,
+                        "5년 실적": 1281708000,
+                        "검색된 회사": "㈜엠라이테크",
+                        "고용자수": "",
+                        "대표자": "신인선",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "1년 경과",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 23.45,
+                        "비고": "",
+                        "사업자번호": "218-81-12450",
+                        "시평": 1614574000,
+                        "신용평가": "BB-\n(23.05.26~24.05.25)",
+                        "여성기업": "",
+                        "영업기간": "2008.03.18",
+                        "유동비율": 740.74,
+                        "일자리창출": "",
+                        "지역": "경기도 광명시",
+                        "품질평가": "없음(24.05.01)"
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 14.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "기간만료",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 1281708000.0,
+                    "share": 0.49
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 117762556710.0,
+            "performance_ratio": 4202.090566034948,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜남양계전",
+                    "role": "대표사",
+                    "possible": false,
+                    "reason": "지역 불일치 (필요: 경기)"
+                },
+                {
+                    "name": "㈜엠라이테크",
+                    "role": "구성사 1",
+                    "possible": false,
+                    "reason": "실적 부족 (필요: 2,241,980,364원)"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        },
+        {
+            "ruleset": {
+                "name": "행안부 30억미만",
+                "use_duration_score": false,
+                "performance_method": "ratio_table",
+                "performance_base_key": "estimation_price",
+                "performance_multiplier": 0.8,
+                "debt_score_table_id": "haeng_30_down_debt",
+                "current_score_table_id": "haeng_30_down_current",
+                "credit_score_table_id": "haeng_default_credit",
+                "performance_score_table_id": "haeng_default_performance",
+                "debt_base_score": 4.8,
+                "current_base_score": 4.2,
+                "performance_base_score": 1.0
+            },
+            "company_details": [
+                {
+                    "role": "대표사",
+                    "name": "㈜신광전력",
+                    "data": {
+                        "3년 실적": 5629050000,
+                        "5년 실적": 10737437000,
+                        "검색된 회사": "㈜신광전력",
+                        "고용자수": "",
+                        "대표자": "구성서",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "최신",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "최신",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "최신",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "최신",
+                            "지역": "최신",
+                            "품질평가": "최신"
+                        },
+                        "부채비율": 37.1,
+                        "비고": "구성서",
+                        "사업자번호": "301-86-06032",
+                        "시평": 6695955000,
+                        "신용평가": "BB0\n(25.04.22~26.04.21)",
+                        "여성기업": "",
+                        "영업기간": "2000.09.05",
+                        "유동비율": 279.82,
+                        "일자리창출": "",
+                        "지역": "충북 옥천군",
+                        "품질평가": ""
+                    },
+                    "business_score_details": {
+                        "debt_score": 8.0,
+                        "current_score": 7.0,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "재무비율"
+                    },
+                    "performance_5y": 10737437000.0,
+                    "share": 0.51
+                },
+                {
+                    "role": "구성사 1",
+                    "name": "㈜코원건설",
+                    "data": {
+                        "3년 실적": 4851540000,
+                        "5년 실적": 8815548000,
+                        "검색된 회사": "㈜코원건설",
+                        "고용자수": "",
+                        "대표자": "이규식",
+                        "데이터상태": {
+                            "3년 실적": "최신",
+                            "5년 실적": "최신",
+                            "고용자수": "1년 이상 경과",
+                            "대표자": "최신",
+                            "부채비율": "최신",
+                            "비고": "1년 경과",
+                            "사업자번호": "최신",
+                            "시평": "최신",
+                            "신용평가": "최신",
+                            "여성기업": "1년 이상 경과",
+                            "영업기간": "최신",
+                            "유동비율": "최신",
+                            "일자리창출": "1년 이상 경과",
+                            "지역": "최신",
+                            "품질평가": "1년 이상 경과"
+                        },
+                        "부채비율": 1202.97,
+                        "비고": "송종윤,유형민",
+                        "사업자번호": "123-81-78983",
+                        "시평": 2586028000,
+                        "신용평가": "BB0\n(25.07.01~26.06.30)",
+                        "여성기업": "",
+                        "영업기간": "2006.02.08",
+                        "유동비율": 32.29,
+                        "일자리창출": "",
+                        "지역": "경기도 성남시",
+                        "품질평가": ""
+                    },
+                    "business_score_details": {
+                        "debt_score": 4.8,
+                        "current_score": 4.2,
+                        "credit_score": 15.0,
+                        "duration_score": 0.0,
+                        "credit_valid": "유효",
+                        "total": 15.0,
+                        "basis": "신용평가"
+                    },
+                    "performance_5y": 8815548000.0,
+                    "share": 0.49
+                }
+            ],
+            "final_business_score": 15.0,
+            "total_weighted_performance": 9795711390.0,
+            "performance_ratio": 349.53781209834005,
+            "final_performance_score": 15.0,
+            "total_score": 30.0,
+            "bid_score": 65,
+            "expected_score": 95.0,
+            "solo_bid_results": [
+                {
+                    "name": "㈜신광전력",
+                    "role": "대표사",
+                    "possible": false,
+                    "reason": "지역 불일치 (필요: 경기)"
+                },
+                {
+                    "name": "㈜코원건설",
+                    "role": "구성사 1",
+                    "possible": true,
+                    "reason": "실적, 지역, 시평액 모두 충족"
+                }
+            ],
+            "sipyung_check_result": {
+                "passed": true,
+                "message": "시평액 제한 없음"
+            },
+            "individual_sipyung_results": [],
+            "price_data": {
+                "estimation_price": 2802475455.0,
+                "notice_base_amount": 3494938788.0,
+                "tuchal_amount": 3157411929.0
+            },
+            "gongo_title": "(가칭)양주2고등학교 신축 전기공사",
+            "gongo_no": "R25BK01007403-000"
+        }
+    ]
+}
