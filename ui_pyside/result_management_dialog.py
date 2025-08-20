@@ -3,27 +3,46 @@
 import os
 import json
 import copy
+import sys
+import re
+
+from openpyxl.styles import PatternFill, Alignment
+
+import calculation_logic
+import utils
 from datetime import datetime
 from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QGroupBox,
                                QPushButton, QTableWidget, QTableWidgetItem,
                                QHeaderView, QSplitter, QLabel, QMessageBox,
-                               QInputDialog)
+                               QInputDialog, QGridLayout, QFileDialog)
 from PySide6.QtCore import Qt, Signal
 from .load_consortium_popup import LoadConsortiumPopup
 from PySide6.QtWidgets import QFrame # QFrame 추가
 from .text_display_popup import TextDisplayPopup
 from consortium_manager import ConsortiumManagerDialog
-import search_logic # search_logic 추가
-import re
+from openpyxl import load_workbook
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
 
 class ResultManagementDialog(QDialog):
     # 변경된 결과 목록을 메인 윈도우로 다시 전달하기 위한 시그널
     results_updated = Signal(list)
 
-    def __init__(self, result_widgets, controller, parent=None):
+    def __init__(self, result_widgets, controller, region_limit, parent=None):
         super().__init__(parent)
         self.result_widgets = result_widgets  # 메인 윈도우의 결과 목록을 복사해 옴
         self.controller = controller  # 메인 윈도우의 기능(엑셀 저장 등)을 호출하기 위함
+        self.region_limit = region_limit
+
 
         self.setWindowTitle("협정 결과 관리")
         self.setMinimumSize(1200, 600)
@@ -38,7 +57,7 @@ class ResultManagementDialog(QDialog):
     def setup_ui(self):
         main_layout = QVBoxLayout(self)
 
-        # 1. 상단 툴바
+        # 1. 상단 툴바 (이전과 동일)
         toolbar_layout = QHBoxLayout()
         self.save_button = QPushButton("💾 현재 목록 저장")
         self.generate_messages_button = QPushButton("✉️ 협정 문자 생성")
@@ -62,25 +81,27 @@ class ResultManagementDialog(QDialog):
         self.consortium_list_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.consortium_list_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
 
+        # ▼▼▼▼▼ [핵심] '협정 상세 수정' 버튼을 여기에 추가합니다 ▼▼▼▼▼
         list_action_layout = QHBoxLayout()
         self.review_button = QPushButton("🔍 상세 검토")
-        self.detailed_edit_button = QPushButton("📝 협정 상세 수정")
+        self.detailed_edit_button = QPushButton("📝 협정 상세 수정")  # <-- 새로 추가!
         self.move_up_button = QPushButton("▲ 위로")
         self.move_down_button = QPushButton("▼ 아래로")
         self.duplicate_button = QPushButton("📄 선택 복제")
         self.delete_button = QPushButton("❌ 선택 삭제")
         list_action_layout.addStretch(1)
         list_action_layout.addWidget(self.review_button)
-        list_action_layout.addWidget(self.detailed_edit_button)# ▼▼▼▼▼ [추가] ▼▼▼▼▼
+        list_action_layout.addWidget(self.detailed_edit_button)  # <-- 레이아웃에 추가!
         list_action_layout.addWidget(self.move_up_button)
         list_action_layout.addWidget(self.move_down_button)
         list_action_layout.addWidget(self.duplicate_button)
         list_action_layout.addWidget(self.delete_button)
+        # ▲▲▲▲▲ 여기까지 ▲▲▲▲▲
 
         left_layout.addWidget(self.consortium_list_table)
         left_layout.addLayout(list_action_layout)
 
-        # 2-2. 우측 패널 (상세 정보)
+        # 2-2. 우측 패널 (상세 정보) (이전과 동일)
         right_panel = QGroupBox("선택한 컨소시엄 상세정보")
         right_layout = QVBoxLayout(right_panel)
         self.detail_title_label = QLabel("← 왼쪽 목록에서 협정을 선택하세요.")
@@ -88,9 +109,33 @@ class ResultManagementDialog(QDialog):
         self.detail_table.setColumnCount(5)
         self.detail_table.setHorizontalHeaderLabels(["구분", "업체명", "지분율(%)", "경영점수", "5년실적"])
         self.detail_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        self.detail_table.setFixedHeight(150)
+
+        # ▼▼▼ [핵심 추가] 점수 요약 그룹박스 ▼▼▼
+        score_summary_group = QGroupBox("점수 요약")
+        score_layout = QGridLayout(score_summary_group)
+
+        # 각 점수를 표시할 QLabel들을 생성합니다.
+        self.final_biz_score_label = QLabel("N/A")
+        self.performance_ratio_label = QLabel("N/A")
+        self.final_perf_score_label = QLabel("N/A")
+        self.total_score_label = QLabel("N/A")
+
+        # 그리드 레이아웃에 제목과 값 QLabel을 배치합니다.
+        score_layout.addWidget(QLabel("<b>경영점수 총점:</b>"), 0, 0)
+        score_layout.addWidget(self.final_biz_score_label, 0, 1)
+        score_layout.addWidget(QLabel("<b>실적 비율:</b>"), 1, 0)
+        score_layout.addWidget(self.performance_ratio_label, 1, 1)
+        score_layout.addWidget(QLabel("<b>실적 점수:</b>"), 2, 0)
+        score_layout.addWidget(self.final_perf_score_label, 2, 1)
+        score_layout.addWidget(QLabel("<b>예상 종합 평점:</b>"), 3, 0)
+        score_layout.addWidget(self.total_score_label, 3, 1)
 
         right_layout.addWidget(self.detail_title_label)
         right_layout.addWidget(self.detail_table)
+        right_layout.addWidget(score_summary_group)  # 우측 패널에 점수 요약 그룹 추가
+        right_layout.addStretch(1)  # 하단 공간 확보
+
 
         splitter.addWidget(left_panel)
         splitter.addWidget(right_panel)
@@ -98,19 +143,19 @@ class ResultManagementDialog(QDialog):
         main_layout.addWidget(splitter)
 
         # 3. 하단 닫기 버튼
-        self.close_button = QPushButton("닫기")
+        self.close_button = QPushButton("저장하고 닫기")
         main_layout.addWidget(self.close_button, 0, Qt.AlignmentFlag.AlignRight)
 
         # 4. 시그널 연결
         self.consortium_list_table.itemSelectionChanged.connect(self.update_detail_view)
-        self.detailed_edit_button.clicked.connect(self._open_consortium_editor)
         self.close_button.clicked.connect(self.accept)
         self.delete_button.clicked.connect(self.delete_selected_consortium)
         self.review_button.clicked.connect(self.open_review_for_selected)
+        self.detailed_edit_button.clicked.connect(self._open_consortium_editor)  # <-- 새 버튼 연결 추가!
         self.duplicate_button.clicked.connect(self.duplicate_selected_consortium)
         self.move_up_button.clicked.connect(self.move_consortium_up)
         self.move_down_button.clicked.connect(self.move_consortium_down)
-        self.excel_export_button.clicked.connect(self.controller.generate_excel_report)
+        self.excel_export_button.clicked.connect(self.generate_excel_report)
         self.generate_messages_button.clicked.connect(self.generate_consortium_messages)
         self.save_button.clicked.connect(self.save_consortiums_list)
 
@@ -131,11 +176,16 @@ class ResultManagementDialog(QDialog):
         self.consortium_list_table.resizeColumnsToContents()
 
     def update_detail_view(self):
-        """선택된 컨소시엄의 상세 정보를 우측에 표시합니다."""
+        """선택된 컨소시엄의 상세 정보와 '점수 요약'을 우측에 표시합니다."""
         selected_rows = self.consortium_list_table.selectionModel().selectedRows()
         if not selected_rows:
             self.detail_title_label.setText("← 왼쪽 목록에서 협정을 선택하세요.")
             self.detail_table.setRowCount(0)
+            # 선택이 없으면 점수 요약도 초기화
+            self.final_biz_score_label.setText("N/A")
+            self.performance_ratio_label.setText("N/A")
+            self.final_perf_score_label.setText("N/A")
+            self.total_score_label.setText("N/A")
             return
 
         selected_row = selected_rows[0].row()
@@ -145,6 +195,7 @@ class ResultManagementDialog(QDialog):
         self.detail_title_label.setText(f"<b>No. {selected_row + 1} 상세정보</b> | {data.get('gongo_title', '')}")
         self.detail_table.setRowCount(len(details))
 
+        # 1. 업체 목록 테이블을 채웁니다.
         for i, comp in enumerate(details):
             share_percent = comp.get('share', 0) * 100.0
             self.detail_table.setItem(i, 0, QTableWidgetItem(comp.get('role', '')))
@@ -153,6 +204,15 @@ class ResultManagementDialog(QDialog):
             self.detail_table.setItem(i, 3,
                                       QTableWidgetItem(f"{comp.get('business_score_details', {}).get('total', 0):.4f}"))
             self.detail_table.setItem(i, 4, QTableWidgetItem(f"{comp.get('performance_5y', 0):,}"))
+
+        # ▼▼▼ [핵심 수정] for 반복문이 끝난 후, 딱 한 번만 점수 요약을 업데이트합니다. ▼▼▼
+        self.final_biz_score_label.setText(f"<b>{data.get('final_business_score', 0):.4f}</b> 점")
+        self.performance_ratio_label.setText(f"{data.get('performance_ratio', 0):.2f} %")
+        self.final_perf_score_label.setText(f"<b>{data.get('final_performance_score', 0):.4f}</b> 점")
+        self.total_score_label.setText(
+            f"<span style='color:blue; font-weight:bold;'>{data.get('expected_score', 0):.4f}</span> 점")
+        # ▲▲▲▲▲ [핵심 수정] 여기까지 ▲▲▲▲▲
+
         self.detail_table.resizeColumnsToContents()
 
     def delete_selected_consortium(self):
@@ -200,6 +260,10 @@ class ResultManagementDialog(QDialog):
             self.consortium_list_table.selectRow(row + 1)
 
     def accept(self):
+        # ▼▼▼ [진단 1] 이 print 문을 추가해주세요 ▼▼▼
+        print(">>> [진단 1] accept() 실행됨. 곧 results_updated 신호를 보냅니다.")
+        # ▲▲▲▲▲ 여기까지 ▲▲▲▲▲
+
         # 창이 닫힐 때, 변경된 목록을 메인 윈도우에 알림
         self.results_updated.emit(self.result_widgets)
         super().accept()
@@ -220,9 +284,7 @@ class ResultManagementDialog(QDialog):
         dialog = ReviewDialogPyside(result_data, self)
         dialog.exec()
 
-        # result_management_dialog.py 클래스 내부
 
-        # result_management_dialog.py 클래스 내부
 
     def save_consortiums_list(self):
         """현재 목록에 있는 협정들을 '이름.json' 파일 하나로 저장합니다."""
@@ -338,33 +400,229 @@ class ResultManagementDialog(QDialog):
         popup = TextDisplayPopup("협정 안내 문자 (전체 복사)", final_text, self)
         popup.exec()
 
-    def _open_consortium_editor(self):
-        """선택한 협정의 상세 편집창(ConsortiumManagerDialog)을 엽니다."""
-        selected_rows = self.consortium_list_table.selectionModel().selectedRows()
-        if not selected_rows:
-            QMessageBox.warning(self, "선택 오류", "먼저 목록에서 수정할 협정을 선택하세요.")
+    def generate_excel_report(self):
+        """사용자가 제공한 최종 보고서 양식(시공실적 포함)에 맞춰 엑셀 파일을 생성합니다."""
+        if not self.result_widgets:
+            QMessageBox.warning(self, "알림", "먼저 '결과 표 추가' 버튼으로 내보낼 결과를 추가해주세요.")
             return
 
-        # [핵심] 현재는 목록 전체가 아니라 선택된 '하나'의 협정만 수정하도록 구현
-        selected_row = selected_rows[0].row()
-        widget_to_edit = self.result_widgets[selected_row]
+        # 1. 파일 저장 경로 설정
+        safe_title = "".join(c for c in self.controller.gongo_title_entry.text() if c not in r'<>:"/\|?*')
+        default_filename = f"{safe_title}.xlsx"
+        save_path, _ = QFileDialog.getSaveFileName(self, "엑셀 보고서 저장", default_filename, "Excel Files (*.xlsx)")
+        if not save_path:
+            return
 
-        # ConsortiumManagerDialog가 요구하는 데이터 형식으로 변환
-        # (컨소시엄 목록 안에 하나의 컨소시엄만 넣어서 전달)
-        initial_data_for_dialog = [widget_to_edit.result_data['company_details']]
+        try:
+            # 2. 템플릿 파일 불러오기
+            template_path = resource_path("haeng_template.xlsx")
+            wb = load_workbook(template_path)
+            ws = wb.active
 
-        # 수정 다이얼로그를 현재 데이터로 엽니다.
-        dialog = ConsortiumManagerDialog(initial_data_for_dialog, self)
+            # 3. 상단 고정 정보 채우기
+            # [수정] self. -> self.controller. 로 변경
+            ws['D2'] = utils.parse_amount(self.controller.estimation_price_entry.text())
+            ws['M1'] = f"{self.controller.gongo_no_entry.text()} {self.controller.gongo_title_entry.text()}"
+            if self.controller.bid_opening_date and self.controller.bid_opening_date.isValid():
+                ws['P2'] = self.controller.bid_opening_date.toString("yyyy-MM-dd HH:mm")
+
+                # 4. 데이터 채우기
+                yellow_fill = PatternFill(start_color='FFFF00', end_color='FFFF00', fill_type='solid')
+                # [수정] self. -> self.controller. 로 변경
+                region_limit = self.controller.region_limit_combo.currentText()
+                wrap_alignment = Alignment(vertical='center', wrap_text=True)
+
+
+            # 목록에 있는 모든 컨소시엄 결과에 대해 반복 (5행부터 시작)
+            for index, result_widget in enumerate(self.result_widgets):
+                current_row = 5 + index
+                result_data = result_widget.result_data
+                details = result_data.get("company_details", [])
+
+                # 업체별 상세정보 기록
+                for comp_detail in details:
+                    role = comp_detail.get('role')
+
+                    # 1. 업체명에서 법인 형태 제거 (기존과 동일)
+                    original_name = comp_detail.get('name', '')
+                    company_name = re.sub(r'\s*㈜\s*|\s*\((주|유|합|재)\)\s*|\s*(주|유|합|재)식회사\s*', '', original_name).strip()
+
+                    # ▼▼▼▼▼ [핵심 추가] 비고란에서 담당자 이름 추출 ▼▼▼▼▼
+                    remarks = comp_detail.get('data', {}).get('비고', '')
+                    manager_name = None
+                    if remarks:
+                        # '김OO', '김OO팀장' 등 2~4글자의 한글 이름을 찾는 정규표현식
+                        match = re.search(r'([가-힣]{2,4})(님|팀장|실장|부장|과장|대리|주임|사원)?', remarks)
+                        if match:
+                            manager_name = match.group(1) # '김장섭' 부분만 추출
+
+                        # [디버깅용 코드 추가]
+                        print(f"회사: {company_name}, 비고: '{remarks}', 추출된 담당자: {manager_name}")
+
+                    # 최종적으로 셀에 들어갈 텍스트 조합
+                    final_cell_text = company_name
+                    if manager_name:
+                        final_cell_text += f"\n{manager_name}" # 줄바꿈 문자로 이름 추가
+
+                    company_region = comp_detail.get('data', {}).get('지역', '')
+
+                    if role == "대표사":
+                        cell = ws.cell(current_row, 3, value=final_cell_text)
+                        cell.alignment = wrap_alignment# C열
+                    elif role.startswith("구성사"):
+                        try:
+                            col_offset = 3 + int(role.split(' ')[1])
+                            cell = ws.cell(current_row, col_offset, value=final_cell_text)
+                            cell.alignment = wrap_alignment
+                        except:
+                            continue
+
+                    if region_limit != "전체" and region_limit in company_region:
+                        cell.fill = yellow_fill
+
+                    # I,J,K... : 지분율
+                    share = comp_detail.get('share', 0)
+
+                    # ▼▼▼▼▼ [디버깅] 엑셀에 쓰기 직전의 값을 확인합니다 ▼▼▼▼▼
+                    print(f"[디버깅] 엑셀에 쓸 지분율 값: {share} (타입: {type(share)})")
+                    # ▲▲▲▲▲ 여기까지 추가 ▲▲▲▲▲
+
+                    if role == "대표사":
+                        # [수정] 숫자 값을 그대로 셀에 쓰고, 셀 서식은 '백분율'로 지정
+                        ws.cell(current_row, 9, value=share).number_format = '0.00%'
+                    elif role.startswith("구성사"):
+                        try:
+                            col_offset = 9 + int(role.split(' ')[1])
+                            ws.cell(current_row, col_offset, value=share).number_format = '0.00%'
+                        except:
+                            continue
+
+                    # P,Q,R... : 경영상태 점수
+                    biz_details = comp_detail.get('business_score_details', {})
+                    biz_score = biz_details.get('total', 0)
+                    if role == "대표사":
+                        ws.cell(current_row, 16, value=biz_score)  # P열
+                    elif role.startswith("구성사"):
+                        try:
+                            col_offset = 16 + int(role.split(' ')[1])
+                            ws.cell(current_row, col_offset, value=biz_score)
+                        except:
+                            continue
+
+                    # ▼▼▼▼▼ [추가] W,X,Y... : 5년 실적 ▼▼▼▼▼
+                    performance_5y = comp_detail.get('performance_5y', 0)
+                    if role == "대표사":
+                        ws.cell(current_row, 23, value=performance_5y).number_format = '#,##0'  # W열
+                    elif role.startswith("구성사"):
+                        try:
+                            col_offset = 23 + int(role.split(' ')[1])  # X, Y, Z...열
+                            ws.cell(current_row, col_offset, value=performance_5y).number_format = '#,##0'
+                        except:
+                            continue
+                    # ▲▲▲▲▲ [추가] 여기까지 ▲▲▲▲▲
+
+            # 5. 파일 저장
+            wb.save(save_path)
+            QMessageBox.information(self, "성공", f"엑셀 보고서가 성공적으로 저장되었습니다.\n경로: {save_path}")
+
+        except FileNotFoundError:
+            QMessageBox.critical(self, "템플릿 파일 오류",
+                                 f"템플릿 파일('haeng_template.xlsx')을 찾을 수 없습니다.\n프로젝트 폴더에 파일이 있는지 확인해주세요.")
+        except Exception as e:
+            QMessageBox.critical(self, "오류", f"파일 저장 중 오류가 발생했습니다: {e}")
+
+    def _open_consortium_editor(self):
+        """'상세 수정' 시점에 점수 계산에 필요한 모든 정보를 수집하여 전달합니다."""
+
+        if not self.result_widgets:
+            QMessageBox.warning(self, "알림", "수정할 협정 목록이 없습니다.")
+            return
+
+            # ▼▼▼ [핵심 수정] validate_inputs() 호출 대신, 필요한 정보만 직접 수집합니다 ▼▼▼
+        try:
+            # 컨트롤러(ConsortiumViewHaeng)의 UI 요소에서 직접 값을 읽어옵니다.
+            announcement_date = self.controller.announcement_date_edit.date().toPython()
+            rule_info = (self.controller.mode, self.controller.rule_combo.currentText())
+
+            estimation_price = utils.parse_amount(self.controller.estimation_price_entry.text())
+            if not estimation_price:
+                QMessageBox.warning(self.controller, "입력 오류", "메인 화면의 '추정가격'을 정확히 입력해주세요.")
+                return
+
+            base_amount = utils.parse_amount(self.controller.base_amount_entry.text())
+            tuchal_amount_text = self.controller.tuchal_amount_label.text().replace("<b>", "").replace("</b>",
+                                                                                                       "").replace(" 원",
+                                                                                                                   "").replace(
+                ",", "")
+            tuchal_amount = utils.parse_amount(tuchal_amount_text) or 0
+
+            price_data = {
+                "estimation_price": estimation_price,
+                "notice_base_amount": base_amount,
+                "tuchal_amount": tuchal_amount
+            }
+
+            sipyung_info = {
+                "is_limited": self.controller.sipyung_limit_check.isChecked(),
+                "limit_amount": utils.parse_amount(self.controller.sipyung_limit_amount.text()) or 0,
+                "method": "비율제" if self.controller.ratio_method_radio.isChecked() else "합산제",
+                "tuchal_amount": price_data["tuchal_amount"]
+            }
+
+            calculation_context = {
+                "announcement_date": announcement_date,
+                "rule_info": rule_info,
+                "price_data": price_data,
+                "sipyung_info": sipyung_info,
+                "region_limit": self.region_limit,
+                "field_to_search": self.controller.gongo_field_combo.currentText()
+            }
+        except Exception as e:
+            QMessageBox.critical(self, "오류", f"점수 계산에 필요한 공고 정보를 가져오는 데 실패했습니다:\n{e}")
+            return
+        # ▲▲▲▲▲ [핵심 수정] 여기까지 ▲▲▲▲▲
+
+        initial_data_for_dialog = [widget.result_data for widget in self.result_widgets]
+
+        dialog = ConsortiumManagerDialog(initial_data_for_dialog, self.region_limit, calculation_context, self)
 
         if dialog.exec() == QDialog.DialogCode.Accepted:
-            # 수정된 최신 데이터를 받아옵니다.
-            updated_data = dialog.get_results()
+            updated_consortiums_details_list = dialog.get_results()
 
-            # 수정된 협정 정보 (보통 첫 번째 항목)를 기존 데이터에 덮어씁니다.
-            if updated_data:
-                widget_to_edit.result_data['company_details'] = updated_data[0]
+            # ▼▼▼▼▼ [핵심 수정] 성적표(result_data)를 새로 발급(재계산)합니다 ▼▼▼▼▼
+            if len(updated_consortiums_details_list) == len(self.result_widgets):
 
-            # 목록과 상세 정보 화면을 새로고침합니다.
+                context_for_calc = calculation_context.copy()
+                context_for_calc.pop('field_to_search', None)  # 'field_to_search' 키를 안전하게 제거
+
+                for i, new_details in enumerate(updated_consortiums_details_list):
+                    if not new_details:  # 빈 협정은 건너뛰기
+                        self.result_widgets[i].result_data['company_details'] = []
+                        continue
+
+                    # 변경된 업체 목록(new_details)과 공고 정보(context)로 점수를 재계산
+                    recalculated_result = calculation_logic.calculate_consortium(
+                        new_details, **context_for_calc
+                    )
+
+                    if recalculated_result:
+                        # 기존 result_data에 공고 제목 등은 유지하면서 재계산된 결과를 덮어쓰기
+                        current_gongo_title = self.result_widgets[i].result_data.get('gongo_title', '')
+                        current_gongo_no = self.result_widgets[i].result_data.get('gongo_no', '')
+
+                        self.result_widgets[i].result_data = recalculated_result
+                        self.result_widgets[i].result_data['gongo_title'] = current_gongo_title
+                        self.result_widgets[i].result_data['gongo_no'] = current_gongo_no
+                    else:
+                        # 계산 실패 시, 업체 목록만이라도 업데이트
+                        self.result_widgets[i].result_data['company_details'] = new_details
+
+            # ▲▲▲▲▲ [핵심 수정] 여기까지 ▲▲▲▲▲
+
             self.populate_consortium_list()
             self.update_detail_view()
-            QMessageBox.information(self, "수정 완료", "협정 정보가 성공적으로 수정되었습니다.")
+            QMessageBox.information(self, "수정 완료", "전체 협정 정보가 성공적으로 수정되었습니다.")
+
+            self.populate_consortium_list()
+            self.update_detail_view()
+            QMessageBox.information(self, "수정 완료", "전s체 협정 정보가 성공적으로 수정되었습니다.")

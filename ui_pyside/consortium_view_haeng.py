@@ -30,14 +30,6 @@ import search_logic
 import re
 
 
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-    return os.path.join(base_path, relative_path)
-
 
 class  ConsortiumViewHaeng(QWidget):
     def __init__(self, controller):
@@ -105,7 +97,6 @@ class  ConsortiumViewHaeng(QWidget):
         self.sajung_rate_entry.textChanged.connect(self.calculate_tuchal_amount)
         self.pre_check_button.clicked.connect(self.run_pre_check)
         self.tree.customContextMenuRequested.connect(self.show_context_menu)
-        self.excel_export_button.clicked.connect(self.generate_excel_report)
         self.open_results_button.clicked.connect(self.open_result_management_dialog)
         self.load_button.clicked.connect(self.load_and_recalculate_consortium)
 
@@ -940,147 +931,28 @@ class  ConsortiumViewHaeng(QWidget):
 
         return True
 
-    def generate_excel_report(self):
-        """사용자가 제공한 최종 보고서 양식(시공실적 포함)에 맞춰 엑셀 파일을 생성합니다."""
-        if not self.result_widgets:
-            QMessageBox.warning(self, "알림", "먼저 '결과 표 추가' 버튼으로 내보낼 결과를 추가해주세요.")
-            return
-
-        # 1. 파일 저장 경로 설정
-        safe_title = "".join(c for c in self.gongo_title_entry.text() if c not in r'<>:"/\|?*')
-        default_filename = f"{safe_title}.xlsx"
-        save_path, _ = QFileDialog.getSaveFileName(self, "엑셀 보고서 저장", default_filename, "Excel Files (*.xlsx)")
-        if not save_path:
-            return
-
-        try:
-            # 2. 템플릿 파일 불러오기
-            template_path = resource_path("haeng_template.xlsx")
-            wb = load_workbook(template_path)
-            ws = wb.active
-
-            # 3. 상단 고정 정보 채우기
-            ws['D2'] = utils.parse_amount(self.estimation_price_entry.text())
-            ws['M1'] = f"{self.gongo_no_entry.text()} {self.gongo_title_entry.text()}"
-            if self.bid_opening_date and self.bid_opening_date.isValid():
-                ws['P2'] = self.bid_opening_date.toString("yyyy-MM-dd HH:mm")
-
-            # 4. 데이터 채우기
-            yellow_fill = PatternFill(start_color='FFFF00', end_color='FFFF00', fill_type='solid')
-            region_limit = self.region_limit_combo.currentText()
-            wrap_alignment = Alignment(vertical='center', wrap_text=True)
-
-
-            # 목록에 있는 모든 컨소시엄 결과에 대해 반복 (5행부터 시작)
-            for index, result_widget in enumerate(self.result_widgets):
-                current_row = 5 + index
-                result_data = result_widget.result_data
-                details = result_data.get("company_details", [])
-
-                # 업체별 상세정보 기록
-                for comp_detail in details:
-                    role = comp_detail.get('role')
-
-                    # 1. 업체명에서 법인 형태 제거 (기존과 동일)
-                    original_name = comp_detail.get('name', '')
-                    company_name = re.sub(r'\s*㈜\s*|\s*\((주|유|합|재)\)\s*|\s*(주|유|합|재)식회사\s*', '', original_name).strip()
-
-                    # ▼▼▼▼▼ [핵심 추가] 비고란에서 담당자 이름 추출 ▼▼▼▼▼
-                    remarks = comp_detail.get('data', {}).get('비고', '')
-                    manager_name = None
-                    if remarks:
-                        # '김OO', '김OO팀장' 등 2~4글자의 한글 이름을 찾는 정규표현식
-                        match = re.search(r'([가-힣]{2,4})(님|팀장|실장|부장|과장|대리|주임|사원)?', remarks)
-                        if match:
-                            manager_name = match.group(1) # '김장섭' 부분만 추출
-
-                        # [디버깅용 코드 추가]
-                        print(f"회사: {company_name}, 비고: '{remarks}', 추출된 담당자: {manager_name}")
-
-                    # 최종적으로 셀에 들어갈 텍스트 조합
-                    final_cell_text = company_name
-                    if manager_name:
-                        final_cell_text += f"\n{manager_name}" # 줄바꿈 문자로 이름 추가
-
-                    company_region = comp_detail.get('data', {}).get('지역', '')
-
-                    if role == "대표사":
-                        cell = ws.cell(current_row, 3, value=final_cell_text)
-                        cell.alignment = wrap_alignment# C열
-                    elif role.startswith("구성사"):
-                        try:
-                            col_offset = 3 + int(role.split(' ')[1])
-                            cell = ws.cell(current_row, col_offset, value=final_cell_text)
-                            cell.alignment = wrap_alignment
-                        except:
-                            continue
-
-                    if region_limit != "전체" and region_limit in company_region:
-                        cell.fill = yellow_fill
-
-                    # I,J,K... : 지분율
-                    share = comp_detail.get('share', 0)
-
-                    # ▼▼▼▼▼ [디버깅] 엑셀에 쓰기 직전의 값을 확인합니다 ▼▼▼▼▼
-                    print(f"[디버깅] 엑셀에 쓸 지분율 값: {share} (타입: {type(share)})")
-                    # ▲▲▲▲▲ 여기까지 추가 ▲▲▲▲▲
-
-                    if role == "대표사":
-                        # [수정] 숫자 값을 그대로 셀에 쓰고, 셀 서식은 '백분율'로 지정
-                        ws.cell(current_row, 9, value=share).number_format = '0.00%'
-                    elif role.startswith("구성사"):
-                        try:
-                            col_offset = 9 + int(role.split(' ')[1])
-                            ws.cell(current_row, col_offset, value=share).number_format = '0.00%'
-                        except:
-                            continue
-
-                    # P,Q,R... : 경영상태 점수
-                    biz_details = comp_detail.get('business_score_details', {})
-                    biz_score = biz_details.get('total', 0)
-                    if role == "대표사":
-                        ws.cell(current_row, 16, value=biz_score)  # P열
-                    elif role.startswith("구성사"):
-                        try:
-                            col_offset = 16 + int(role.split(' ')[1])
-                            ws.cell(current_row, col_offset, value=biz_score)
-                        except:
-                            continue
-
-                    # ▼▼▼▼▼ [추가] W,X,Y... : 5년 실적 ▼▼▼▼▼
-                    performance_5y = comp_detail.get('performance_5y', 0)
-                    if role == "대표사":
-                        ws.cell(current_row, 23, value=performance_5y).number_format = '#,##0'  # W열
-                    elif role.startswith("구성사"):
-                        try:
-                            col_offset = 23 + int(role.split(' ')[1])  # X, Y, Z...열
-                            ws.cell(current_row, col_offset, value=performance_5y).number_format = '#,##0'
-                        except:
-                            continue
-                    # ▲▲▲▲▲ [추가] 여기까지 ▲▲▲▲▲
-
-            # 5. 파일 저장
-            wb.save(save_path)
-            QMessageBox.information(self, "성공", f"엑셀 보고서가 성공적으로 저장되었습니다.\n경로: {save_path}")
-
-        except FileNotFoundError:
-            QMessageBox.critical(self, "템플릿 파일 오류",
-                                 f"템플릿 파일('haeng_template.xlsx')을 찾을 수 없습니다.\n프로젝트 폴더에 파일이 있는지 확인해주세요.")
-        except Exception as e:
-            QMessageBox.critical(self, "오류", f"파일 저장 중 오류가 발생했습니다: {e}")
-
 
 
     def open_result_management_dialog(self):
         """결과 관리 새 창을 엽니다."""
-        dialog = ResultManagementDialog(self.result_widgets, self)
-        # 새 창에서 데이터가 변경되면, on_results_updated 함수를 실행하도록 연결
+
+        if not self.result_widgets:
+            QMessageBox.warning(self, "알림", "먼저 '결과 표 추가' 버튼으로 관리할 협정을 추가해주세요.")
+            return
+
+        # ▼▼▼ [핵심] 누락되었던 region_limit 정보를 다시 가져옵니다. ▼▼▼
+        region_limit = self.region_limit_combo.currentText()
+        # ▲▲▲▲▲ 여기까지 ▲▲▲▲▲
+
+        # controller는 self, parent도 self, 그리고 위에서 가져온 region_limit를 전달합니다.
+        dialog = ResultManagementDialog(self.result_widgets, self, region_limit, self)
         dialog.results_updated.connect(self.on_results_updated)
         dialog.exec()
 
     def on_results_updated(self, updated_widgets):
         """새 창에서 변경된 결과 목록을 현재 목록에 반영합니다."""
         self.result_widgets = updated_widgets
+        self.update_summary_display()
         QMessageBox.information(self, "반영 완료", f"변경된 결과({len(self.result_widgets)}건)가 반영되었습니다.")
 
     def update_summary_display(self):

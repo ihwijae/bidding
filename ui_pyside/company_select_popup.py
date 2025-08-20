@@ -81,7 +81,11 @@ class CompanySelectPopupPyside(QDialog):
 
         name = self.search_entry.text().strip()
         source = self.field_to_search
+
+        # ▼▼▼ [핵심 수정] 복잡한 경로 탐색 로직을 단순화합니다 ▼▼▼
+        # 이제 self.controller는 항상 MainWindow이므로, 경로가 하나로 고정됩니다.
         filepath = self.controller.source_files.get(source)
+        # ▲▲▲▲▲ [핵심 수정] 여기까지 ▲▲▲▲▲
 
         if not name:
             QMessageBox.warning(self, "입력 오류", "업체명을 입력하세요.")
@@ -89,13 +93,13 @@ class CompanySelectPopupPyside(QDialog):
         if not filepath or not os.path.exists(filepath):
             QMessageBox.critical(self, "파일 오류", f"'{source}' 데이터의 엑셀 파일 경로를 확인하세요.")
             return
-        
+
         self.results_table.setRowCount(0)
         self.search_entry.setEnabled(False)
         self.search_button.setEnabled(False)
         self.loading_label.setVisible(True)
         self.loading_movie.start()
-        
+
         self.worker = PopupSearchWorker(filepath, name)
         self.worker.finished.connect(self.show_results)
         self.worker.start()
