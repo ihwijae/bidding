@@ -27,12 +27,11 @@ class CompanyItemWidget(QWidget):
 
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
 
-        # [핵심] is_regional 값에 따라 배경색과 hover 색상을 결정
         if is_regional:
-            bg_color = "#fffbe6"  # 연한 노란색
+            bg_color = "#fffbe6"
             hover_color = "#fcf8e3"
         else:
-            bg_color = "#ffffff"  # 흰색
+            bg_color = "#ffffff"
             hover_color = "#f7f9fc"
 
         self.setStyleSheet(f"""
@@ -68,21 +67,26 @@ class CompanyItemWidget(QWidget):
         main_layout.addWidget(self.share_editor)
         main_layout.addWidget(self.percent_label)
 
-        self.delete_button = QPushButton("×")
+        self.delete_button = QPushButton("X")
         self.delete_button.setFixedSize(22, 22)
+        # ▼▼▼ [최종 수정] 요청하신 빨간색 배경 스타일 적용 ▼▼▼
         self.delete_button.setStyleSheet("""
-                QPushButton {{
-                    font-size: 14px; color: #95a5a6; background-color: transparent;
-                    border: none; border-radius: 11px;
-                }}
-                QPushButton:hover {{
-                    background-color: #e8eaed; color: #e74c3c;
-                }}
+                QPushButton {
+                    font-size: 14px;
+                    color: #e74c3c; /* 평소 'X' 글자색 */
+                    background-color: #f5b7b1; /* 평소 연한 빨강 배경 */
+                    border: none;
+                    border-radius: 11px;
+                }
+                QPushButton:hover {
+                    color: white; /* 마우스 올리면 흰색 글자 */
+                    background-color: #e74c3c; /* 마우스 올리면 진한 빨강 배경 */
+                }
             """)
+        # ▲▲▲▲▲ [최종 수정] 여기까지 ▲▲▲▲▲
         self.delete_button.clicked.connect(lambda: self.delete_requested.emit(self))
         main_layout.addWidget(self.delete_button)
 
-    # ... (mousePressEvent, mouseMoveEvent 등 다른 함수는 이전과 동일) ...
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton: self.drag_start_position = event.position().toPoint()
 
@@ -124,9 +128,7 @@ class CompanyItemWidget(QWidget):
         self._set_view_mode()
 
 
-# ▼▼▼ 2. AddCompanyDialog 클래스 (이전과 동일) ▼▼▼
 class AddCompanyDialog(QDialog):
-    # ... (이전 코드와 동일, 변경 없음) ...
     def __init__(self, parent=None):
         super().__init__(parent);
         self.setWindowTitle("업체 추가");
@@ -155,9 +157,7 @@ class AddCompanyDialog(QDialog):
         return None
 
 
-# ▼▼▼ 3. DropTargetWidget 클래스 (이전과 동일) ▼▼▼
 class DropTargetWidget(QWidget):
-    # ... (이전 코드와 동일, 변경 없음) ...
     def __init__(self, parent_dialog, parent=None):
         super().__init__(parent)
         self.parent_dialog = parent_dialog
@@ -177,14 +177,13 @@ class DropTargetWidget(QWidget):
         event.acceptProposedAction()
 
 
-# ▼▼▼ 4. ConsortiumManagerDialog 클래스 (지역업체 강조 기능 추가) ▼▼▼
 class ConsortiumManagerDialog(QDialog):
     def __init__(self, consortiums_data, region_limit, calculation_context, parent=None):
         super().__init__(parent)
         self.setWindowTitle("협정 결과 상세 편집")
         self.setMinimumSize(1000, 600)
         self.setFont(QFont("맑은 고딕", 9))
-        self.region_limit = region_limit  # 지역제한 정보 저장
+        self.region_limit = region_limit
         self.setStyleSheet(parent.styleSheet() + """
             QGroupBox {
                 background-color: #ffffff;
@@ -203,10 +202,9 @@ class ConsortiumManagerDialog(QDialog):
             QScrollArea { border: none; }
             QWidget#listContainer { background-color: #ffffff; }
         """)
-        self.calculation_context = calculation_context  # 전달받은 문맥 정보 저장
-        self.scoreboard_labels = []  # 미니 점수판 QLabel들을 저장할 리스트
+        self.calculation_context = calculation_context
+        self.scoreboard_labels = []
 
-        # ... (이하 __init__ 함수 구조는 이전과 동일) ...
         container_widget = QWidget()
         container_widget.setStyleSheet("background: transparent;")
         consortiums_area_layout = QHBoxLayout(container_widget)
@@ -310,7 +308,6 @@ class ConsortiumManagerDialog(QDialog):
             QTimer.singleShot(0, self.recalculate_and_refresh_all)
 
     def _handle_add_company(self):
-        """[+ 업체 추가] 버튼 클릭 시, CompanySelectPopupPyside를 엽니다."""
         existing_companies = []
         all_layouts = self.consortium_layouts + [self.standby_layout]
         for layout in all_layouts:
@@ -319,10 +316,7 @@ class ConsortiumManagerDialog(QDialog):
                 if isinstance(widget, CompanyItemWidget):
                     existing_companies.append(widget.company_data.get('name'))
 
-        # ▼▼▼ [핵심 수정] 복잡한 경로 대신 최상위 컨트롤러(MainWindow)를 직접 찾아서 전달합니다 ▼▼▼
         parent_dialog = self.parent()
-        # parent_dialog는 ResultManagementDialog, .controller는 ConsortiumViewHaeng
-        # .controller.controller가 바로 MainWindow입니다.
         main_controller = parent_dialog.controller.controller if parent_dialog and hasattr(parent_dialog,
                                                                                            'controller') else None
         field_to_search = self.calculation_context.get("field_to_search", "-- 분야 선택 --")
@@ -331,13 +325,10 @@ class ConsortiumManagerDialog(QDialog):
             QMessageBox.warning(self, "오류", "업체 검색에 필요한 최상위 컨트롤러나 공고분야 정보가 없습니다.")
             return
 
-        # 팝업의 controller로 main_controller(MainWindow)를 전달
         self.search_popup = CompanySelectPopupPyside(self, main_controller, field_to_search,
                                                      self._on_company_selected_from_popup,
                                                      existing_companies)
         self.search_popup.exec()
-
-
 
     def _handle_delete_item(self, widget_to_delete):
         # 1. 삭제가 일어난 위젯이 어느 레이아웃에 속해있는지 먼저 찾습니다.
@@ -353,7 +344,7 @@ class ConsortiumManagerDialog(QDialog):
         # 2. 위젯을 화면에서 제거합니다.
         widget_to_delete.deleteLater()
 
-        # ▼▼▼ [버그 수정 3] '대기열'이 아닌, 실제 협정 레이아웃에서 삭제됐을 때만 재계산 ▼▼▼
+        # ▼▼▼ [버그 수정 2] '대기열'이 아닌, 실제 협정 레이아웃에서 삭제됐을 때만 재계산 ▼▼▼
         if deleted_from_layout in self.consortium_layouts:
             QTimer.singleShot(0, self.recalculate_and_refresh_all)
 
@@ -372,9 +363,15 @@ class ConsortiumManagerDialog(QDialog):
             if updated_layout:
                 break
 
-        # ▼▼▼ [핵심] '대기열'이 아닌, 실제 협정 레이아웃에서 변경이 일어났을 때만 재계산 호출 ▼▼▼
+        # ▼▼▼ [진단 코드] 어느 목록에서 업데이트가 발생했는지 출력 ▼▼▼
         if updated_layout in self.consortium_layouts:
+            print(" -> [진단] '협정' 목록에서 변경이 감지되었습니다. 재계산을 실행합니다.")
             self.recalculate_and_refresh_all()
+        elif updated_layout == self.standby_layout:
+            print(" -> [진단] '대기중인 업체' 목록에서 변경이 감지되었습니다. 재계산을 실행하지 않습니다.")
+        else:
+            print(" -> [진단] 변경이 발생한 목록을 찾을 수 없습니다.")
+        # ▲▲▲▲▲ [진단 코드] 여기까지 ▲▲▲▲▲
 
     def get_results(self):
         final_consortiums_details = []
@@ -387,10 +384,7 @@ class ConsortiumManagerDialog(QDialog):
             final_consortiums_details.append(consortium_details)
         return final_consortiums_details
 
-
-
     def recalculate_single_consortium(self, index):
-        """특정 인덱스의 협정 점수를 다시 계산하고 결과 데이터를 반환합니다."""
         layout = self.consortium_layouts[index]
         companies_data = []
         for j in range(layout.count()):
@@ -400,11 +394,11 @@ class ConsortiumManagerDialog(QDialog):
 
         if not companies_data:
             self.scoreboard_labels[index].setText("구성된 업체가 없습니다.")
-            return {}  # 빈 딕셔너리 반환
+            return {}
 
         try:
             context_for_calc = self.calculation_context.copy()
-            context_for_calc.pop('field_to_search', None)  # 'field_to_search' 키를 안전하게 제거
+            context_for_calc.pop('field_to_search', None)
 
             new_result = calculation_logic.calculate_consortium(
                 companies_data, **context_for_calc
@@ -415,21 +409,19 @@ class ConsortiumManagerDialog(QDialog):
                 total_score = new_result.get('expected_score', 0)
                 score_text = f"경영: {biz_score:.4f} | 실적: {perf_score:.4f} | <b>총점: {total_score:.4f}</b>"
                 self.scoreboard_labels[index].setText(score_text)
-                return new_result  # 재계산된 결과 반환
+                return new_result
             else:
                 self.scoreboard_labels[index].setText("<span style='color:red;'>계산 오류</span>")
         except Exception as e:
             print(f"점수 재계산 오류: {e}")
             self.scoreboard_labels[index].setText("<span style='color:red;'>계산 오류 발생</span>")
-        return {}  # 오류 발생 시 빈 딕셔너리 반환
+        return {}
 
     def recalculate_and_refresh_all(self):
-        """모든 협정의 점수를 다시 계산하고 미니 점수판을 업데이트합니다."""
         for i in range(len(self.consortium_layouts)):
             self.recalculate_single_consortium(i)
 
     def _on_company_selected_from_popup(self, selected_data):
-        """검색 팝업에서 업체가 선택되었을 때 실행되는 콜백 함수"""
         import utils
         new_company_data = {
             'role': '구성사 ?', 'name': selected_data.get('검색된 회사'), 'data': selected_data,
