@@ -8,10 +8,11 @@ from PySide6.QtWidgets import (
     QLabel, QLineEdit, QDialogButtonBox, QMessageBox,
     QScrollArea, QSizePolicy
 )
-from PySide6.QtCore import Qt, Signal, QSize, QMimeData, QTimer
+from PySide6.QtCore import Qt, Signal, QSize, QMimeData, QTimer, QEvent
 from PySide6.QtGui import QDrag, QDoubleValidator, QPixmap, QFont
 import calculation_logic
 from ui_pyside.company_select_popup import CompanySelectPopupPyside
+from ui_pyside.enter_key_guard import EnterToFinishFilter
 
 
 # ▼▼▼ 1. CompanyItemWidget 클래스 (지역업체 강조 기능 추가) ▼▼▼
@@ -53,6 +54,11 @@ class CompanyItemWidget(QWidget):
         self.name_label.setStyleSheet("color: #2c3e50; border: none; background: transparent;")
 
         self.share_editor = QLineEdit()
+        self._enter_filters = getattr(self, "_enter_filters", [])
+        filt = EnterToFinishFilter(lambda: self._finish_editing())
+        self.share_editor.installEventFilter(filt);
+        self._enter_filters.append(filt)
+
         self.share_editor.setValidator(QDoubleValidator(0.00, 100.00, 2))
         self.share_editor.editingFinished.connect(self._finish_editing)
         self.share_editor.setMaximumWidth(60)
